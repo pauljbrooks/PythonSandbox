@@ -85,7 +85,7 @@ function checkEnd(player) {
 
   if (board.every(Boolean)) {
     gameOver = true;
-    statusText.textContent = 'THE ONLY WINNING MOVE IS NOT TO LOSE.';
+    statusText.textContent = 'THE ONLY WINNING MOVE IS NOT TO PLAY.';
     return true;
   }
 
