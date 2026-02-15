@@ -1,0 +1,188 @@
+:root {
+  color-scheme: only light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: clamp(0.4rem, 1.6vw, 1rem);
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.04em;
+}
+
+.screen-shell {
+  width: min(96vw, 860px);
+  height: min(94vh, 760px);
+  position: relative;
+  border: 3px solid #fff;
+  background: #020202;
+  box-shadow: 0 0 20px #fff3, inset 0 0 32px #fff2;
+  overflow: hidden;
+}
+
+.crt-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.09) 0,
+      rgba(255, 255, 255, 0.09) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(circle at center, transparent 42%, rgba(255, 255, 255, 0.08) 100%);
+  mix-blend-mode: screen;
+  animation: flicker 0.12s infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.terminal {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: clamp(0.8rem, 1.8vw, 1.3rem);
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  text-transform: uppercase;
+}
+
+.subhead {
+  margin: 0.35rem 0 1rem;
+  font-size: 0.85rem;
+}
+
+.panel {
+  display: none;
+  border: 1px solid #fff;
+  padding: clamp(0.75rem, 1.8vw, 1rem);
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.panel.active {
+  display: block;
+}
+
+.prompt {
+  margin-top: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.menu-list {
+  margin: 1.2rem 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+button {
+  width: 100%;
+  text-align: left;
+  background: #000;
+  border: 1px solid #fff;
+  color: #fff;
+  font: inherit;
+  padding: 0.7rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+  background: #fff;
+  color: #000;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.status-row.lower {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+}
+
+#statusText {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+.mini {
+  width: auto;
+  font-size: 0.78rem;
+  padding: 0.45rem 0.65rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(70px, 1fr));
+  gap: 0.45rem;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: #000;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  padding-top: 0.1em;
+}
+
+.cell:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.message,
+.info-body {
+  min-height: 3.4rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+@media (max-width: 560px) {
+  .screen-shell {
+    width: 100%;
+    height: min(96vh, 720px);
+  }
+
+  .status-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
