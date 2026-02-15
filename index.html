@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WOPR Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="screen-shell">
+      <div class="crt-frame"></div>
+      <main class="terminal" aria-live="polite">
+        <header>
+          <h1>WOPR STRATEGIC TERMINAL</h1>
+          <p class="subhead">GLOBAL THERMONUCLEAR TIC-TAC-TOE</p>
+        </header>
+
+        <section id="menu" class="panel active" aria-label="Main menu">
+          <p class="prompt">SHALL WE PLAY A GAME?</p>
+          <ul class="menu-list">
+            <li><button data-menu-action="start">1. TIC-TAC-TOE</button></li>
+            <li><button data-menu-action="rules">2. VIEW RULES</button></li>
+            <li><button data-menu-action="about">3. SYSTEM STATUS</button></li>
+          </ul>
+          <div id="menuMessage" class="message" role="status"></div>
+        </section>
+
+        <section id="game" class="panel" aria-label="Game panel">
+          <div class="status-row">
+            <p id="statusText">AWAITING COMMAND</p>
+            <button id="returnBtn" class="mini">RETURN TO MENU</button>
+          </div>
+          <div id="board" class="board" role="grid" aria-label="Tic-tac-toe board"></div>
+          <div class="status-row lower">
+            <button id="newGameBtn" class="mini">NEW SIMULATION</button>
+          </div>
+        </section>
+
+        <section id="info" class="panel" aria-label="Information panel">
+          <p id="infoTitle" class="prompt"></p>
+          <p id="infoBody" class="info-body"></p>
+          <button id="infoBackBtn" class="mini">BACK</button>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
