@@ -9,7 +9,6 @@
 body {
   margin: 0;
   min-height: 100vh;
-  padding: clamp(0.4rem, 1.6vw, 1rem);
   display: grid;
   place-items: center;
   background: #000;
@@ -19,8 +18,8 @@ body {
 }
 
 .screen-shell {
-  width: min(96vw, 860px);
-  height: min(94vh, 760px);
+  width: min(92vw, 780px);
+  min-height: min(92vh, 860px);
   position: relative;
   border: 3px solid #fff;
   background: #020202;
@@ -58,10 +57,8 @@ body {
 .terminal {
   position: relative;
   z-index: 1;
-  height: 100%;
-  padding: clamp(0.8rem, 1.8vw, 1.3rem);
-  display: flex;
-  flex-direction: column;
+  padding: 1.3rem;
+  min-height: inherit;
 }
 
 h1 {
@@ -78,10 +75,8 @@ h1 {
 .panel {
   display: none;
   border: 1px solid #fff;
-  padding: clamp(0.75rem, 1.8vw, 1rem);
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
+  padding: 1rem;
+  min-height: 540px;
 }
 
 .panel.active {
@@ -176,9 +171,8 @@ button:focus-visible {
 }
 
 @media (max-width: 560px) {
-  .screen-shell {
-    width: 100%;
-    height: min(96vh, 720px);
+  .panel {
+    min-height: 500px;
   }
 
   .status-row {
