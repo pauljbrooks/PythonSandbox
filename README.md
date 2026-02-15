@@ -1,44 +1,43 @@
-# WOPR Tic-Tac-Toe
+# WOPR Game Terminal
 
-A browser-based tic-tac-toe game inspired by the computer terminal style in *WarGames*.
+A browser-based retro terminal game collection inspired by the computer style in *WarGames*.
 
 ## Features
 
-- Monochrome black-and-white terminal presentation.
-- CRT-inspired visual treatment with scanlines, glow, and flicker.
-- Opening menu flow with themed prompts.
-- Human (`X`) vs computer (`O`) gameplay.
-- Simple computer strategy: win first, block second, then prioritize center/corners.
+- Black-and-white monochrome UI with CRT scanlines, glow, and flicker.
+- Opening boot-style message sequence with persistent lines and a blinking cursor.
+- Dynamic viewport sizing to fit standard browser windows.
+- Two playable games:
+  - **Tic-Tac-Toe** (`X` vs computer `O`)
+  - **Squares** (10x10 dots / Dots-and-Boxes style)
 
 ## Files
 
-- `index.html` — terminal layout, menu, game, and info panels.
-- `styles.css` — visual styling and CRT effect.
-- `app.js` — menu behavior and tic-tac-toe game logic.
+- `index.html` — menu, game panels, and info screen layout.
+- `styles.css` — terminal visuals, responsive sizing, and game board styling.
+- `app.js` — menu flow, tic-tac-toe logic, and squares game logic.
 
 ## Run locally
-
-From the project directory:
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Then open:
+Open:
 
 - <http://127.0.0.1:4173>
 
 ## Controls
 
 - **Main Menu**
-  - **1. TIC-TAC-TOE** starts a game.
-  - **2. VIEW RULES** opens the rules panel.
-  - **3. SYSTEM STATUS** opens the status panel.
-- **Game Panel**
-  - Click any open cell to place `X`.
-  - **NEW SIMULATION** resets the board.
-  - **RETURN TO MENU** exits back to main menu.
+  - **1. TIC-TAC-TOE** starts tic-tac-toe.
+  - **2. SQUARES** starts the 10x10 dots grid game.
+  - **3. VIEW RULES** opens rules.
+  - **4. SYSTEM STATUS** opens status info.
+- **In Game**
+  - **RETURN TO MENU** exits to menu.
+  - **NEW ...** restarts the current game mode.
 
 ## Notes
 
-This project uses only plain HTML, CSS, and JavaScript (no build step required).
+Built with plain HTML, CSS, and JavaScript (no build step required).
