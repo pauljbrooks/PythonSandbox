@@ -1,0 +1,272 @@
+:root {
+  color-scheme: only light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: clamp(0.4rem, 1.3vw, 0.9rem);
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.04em;
+}
+
+.screen-shell {
+  width: min(96vw, 900px);
+  height: min(95vh, 760px);
+  position: relative;
+  border: 3px solid #fff;
+  background: #020202;
+  box-shadow: 0 0 20px #fff3, inset 0 0 32px #fff2;
+  overflow: hidden;
+}
+
+.crt-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.09) 0, rgba(255, 255, 255, 0.09) 1px, transparent 2px, transparent 4px),
+    radial-gradient(circle at center, transparent 42%, rgba(255, 255, 255, 0.08) 100%);
+  mix-blend-mode: screen;
+  animation: flicker 0.12s infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.terminal {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: clamp(0.75rem, 1.6vw, 1.2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+  text-transform: uppercase;
+}
+
+.subhead {
+  margin: 0.35rem 0 0.9rem;
+  font-size: 0.8rem;
+}
+
+.panel {
+  display: none;
+  border: 1px solid #fff;
+  padding: clamp(0.65rem, 1.5vw, 0.95rem);
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.panel.active {
+  display: block;
+}
+
+.prompt {
+  margin-top: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.compact {
+  margin: 0;
+  font-size: 0.84rem;
+}
+
+.menu-list {
+  margin: 0.9rem 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+button {
+  width: 100%;
+  text-align: left;
+  background: #000;
+  border: 1px solid #fff;
+  color: #fff;
+  font: inherit;
+  padding: 0.6rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+  background: #fff;
+  color: #000;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.status-row.lower {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+}
+
+.mini {
+  width: auto;
+  font-size: 0.75rem;
+  padding: 0.42rem 0.64rem;
+}
+
+.game-mode {
+  display: none;
+}
+
+.game-mode.active {
+  display: block;
+}
+
+.board {
+  width: min(62vw, 300px);
+  margin: 0.7rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: #000;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  padding-top: 0.06em;
+}
+
+.cell:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+#squaresScore {
+  margin-bottom: 0.5rem;
+}
+
+.dots-board {
+  width: min(90vw, 500px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(19, 1fr);
+  gap: 2px;
+  background: #000;
+}
+
+.dot {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.edge {
+  background: #050505;
+  border: 1px solid #333;
+  padding: 0;
+  min-height: 100%;
+}
+
+.edge-h {
+  height: 12px;
+}
+
+.edge-v {
+  width: 12px;
+  justify-self: center;
+}
+
+.edge.claimed-x,
+.edge.claimed-o {
+  background: #fff;
+  border-color: #fff;
+}
+
+.box {
+  border: 1px solid #222;
+  min-height: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 0.58rem;
+}
+
+.box.claimed-x,
+.box.claimed-o {
+  background: #111;
+  border-color: #fff;
+}
+
+.message,
+.info-body {
+  min-height: 4rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.message-line.cursor::after {
+  content: "_";
+  margin-left: 2px;
+  animation: blink 0.9s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .screen-shell {
+    width: 100%;
+    height: min(97vh, 720px);
+  }
+
+  .status-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dots-board {
+    width: min(88vw, 390px);
+  }
+}
