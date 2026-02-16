@@ -67,35 +67,109 @@ body {
   opacity: 0;
   mix-blend-mode: screen;
   background:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 18%,
-      rgba(255, 255, 255, 0.32) 24%,
-      rgba(255, 255, 255, 0.1) 28%,
-      transparent 34%,
-      transparent 54%,
-      rgba(255, 255, 255, 0.24) 60%,
-      transparent 69%,
-      transparent 100%
-    ),
     repeating-linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.09) 0,
-      rgba(255, 255, 255, 0.09) 2px,
-      transparent 2px,
-      transparent 6px
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent 7px,
+      rgba(255, 255, 255, 0.08) 7px,
+      rgba(255, 255, 255, 0.08) 9px,
+      transparent 9px,
+      transparent 15px
     );
   transform: translate3d(0, 0, 0);
 }
 
+.tracking-glitch::before {
+  content: "";
+  position: absolute;
+  left: -8%;
+  width: 116%;
+  height: 30%;
+  top: -34%;
+  opacity: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(255, 255, 255, 0.82) 26%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.38) 0,
+      rgba(255, 255, 255, 0.38) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+.tracking-glitch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.18) 0,
+      rgba(255, 255, 255, 0.18) 3px,
+      transparent 3px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 6px,
+      rgba(255, 255, 255, 0.18) 6px,
+      rgba(255, 255, 255, 0.18) 10px,
+      transparent 10px,
+      transparent 16px
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent 30%,
+      rgba(255, 255, 255, 0.16) 30%,
+      rgba(255, 255, 255, 0.16) 58%,
+      transparent 58%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to left,
+      transparent 0,
+      transparent 36%,
+      rgba(255, 255, 255, 0.14) 36%,
+      rgba(255, 255, 255, 0.14) 64%,
+      transparent 64%,
+      transparent 100%
+    );
+}
+
 .screen-shell.is-glitching .tracking-glitch {
-  opacity: 1;
-  animation: tracking-roll 0.14s steps(2, end) infinite;
+  opacity: 0.22;
+  animation: tracking-noise 0.18s steps(2, end) infinite;
+}
+
+.screen-shell.is-glitching .tracking-glitch::before {
+  opacity: 0.98;
+  animation: tracking-sweep 2.08s linear infinite;
+}
+
+.screen-shell.is-glitching .tracking-glitch::after {
+  opacity: 0.28;
+  animation: tracking-block-shift 0.14s steps(1, end) infinite;
 }
 
 .screen-shell.is-glitching .terminal {
-  animation: tracking-jitter 0.09s steps(2, end) infinite;
+  animation: tracking-jitter 0.18s steps(1, end) infinite;
 }
 
 h1 {
@@ -314,28 +388,68 @@ button:focus-visible {
 
 @keyframes tracking-jitter {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) skewX(0deg);
   }
-  35% {
-    transform: translateX(-2px);
+  16% {
+    transform: translate3d(-0.5px, 0, 0) skewX(-0.3deg);
   }
-  60% {
-    transform: translateX(3px);
+  36% {
+    transform: translate3d(0.5px, 0, 0) skewX(0.2deg);
+  }
+  58% {
+    transform: translate3d(-0.5px, 0, 0) skewX(0.3deg);
+  }
+  76% {
+    transform: translate3d(0.5px, 0, 0) skewX(-0.2deg);
   }
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) skewX(0deg);
   }
 }
 
-@keyframes tracking-roll {
+@keyframes tracking-noise {
   0% {
-    transform: translate3d(0, -6%, 0) skewX(0deg);
+    transform: translate3d(0, 0, 0);
+    background-position: 0 0, 0 0;
   }
-  50% {
-    transform: translate3d(0, 3%, 0) skewX(1deg);
+  33% {
+    transform: translate3d(-0.5px, 0, 0);
+    background-position: 0 1px, -3px 0;
+  }
+  66% {
+    transform: translate3d(0.5px, 0, 0);
+    background-position: 0 -1px, 3px 0;
   }
   100% {
-    transform: translate3d(0, 11%, 0) skewX(-1deg);
+    transform: translate3d(0, 0, 0);
+    background-position: 0 0, 0 0;
+  }
+}
+
+@keyframes tracking-sweep {
+  0% {
+    transform: translateY(-150%);
+  }
+  100% {
+    transform: translateY(260%);
+  }
+}
+
+@keyframes tracking-block-shift {
+  0% {
+    background-position: 0 0, 0 0, -2px 0, 2px 0;
+  }
+  25% {
+    background-position: 4px 0, -4px 0, 6px 0, -6px 0;
+  }
+  50% {
+    background-position: -5px 0, 5px 0, -8px 0, 8px 0;
+  }
+  75% {
+    background-position: 3px 0, -3px 0, 5px 0, -5px 0;
+  }
+  100% {
+    background-position: 0 0, 0 0, -2px 0, 2px 0;
   }
 }
 
