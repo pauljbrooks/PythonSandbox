@@ -180,7 +180,7 @@ button:focus-visible {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(19, 1fr);
-  gap: 2px;
+  gap: 0;
   background: #000;
 }
 
@@ -200,29 +200,44 @@ button:focus-visible {
 }
 
 .edge {
-  background: #050505;
-  border: 1px solid #333;
+  background: transparent;
+  border: 0;
   padding: 0;
   min-height: 100%;
+  position: relative;
 }
 
-.edge-h {
-  height: 12px;
-}
-
-.edge-v {
-  width: 12px;
-  justify-self: center;
-}
-
-.edge.claimed-x,
-.edge.claimed-o {
+.edge::before {
+  content: "";
+  display: block;
+  margin: auto;
   background: #fff;
-  border-color: #fff;
+  opacity: 0;
+}
+
+.edge-h::before {
+  width: 84%;
+  height: 4px;
+}
+
+.edge-v::before {
+  width: 4px;
+  height: 84%;
+}
+
+.edge.claimed-x::before,
+.edge.claimed-o::before {
+  opacity: 1;
+}
+
+.edge:hover,
+.edge:focus-visible {
+  background: transparent;
+  color: #fff;
 }
 
 .box {
-  border: 1px solid #222;
+  border: 0;
   min-height: 16px;
   display: grid;
   place-items: center;
@@ -232,7 +247,7 @@ button:focus-visible {
 .box.claimed-x,
 .box.claimed-o {
   background: #111;
-  border-color: #fff;
+  border: 1px solid #fff;
 }
 
 .message,
