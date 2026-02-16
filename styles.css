@@ -209,20 +209,22 @@ button:focus-visible {
 
 .edge::before {
   content: "";
-  display: block;
-  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   background: #fff;
   opacity: 0;
+  transform: translate(-50%, -50%);
 }
 
 .edge-h::before {
-  width: 84%;
+  width: calc(100% + 6px);
   height: 4px;
 }
 
 .edge-v::before {
   width: 4px;
-  height: 84%;
+  height: calc(100% + 6px);
 }
 
 .edge.claimed-x::before,
