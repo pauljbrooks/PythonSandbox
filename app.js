@@ -3,6 +3,7 @@ const panels = {
   game: document.getElementById('game'),
   info: document.getElementById('info'),
 };
+const screenShell = document.querySelector('.screen-shell');
 
 const menuMessage = document.getElementById('menuMessage');
 const menuButtons = document.querySelectorAll('[data-menu-action]');
@@ -33,6 +34,31 @@ let sqBoxes = Array((DOTS - 1) * (DOTS - 1)).fill('');
 let sqCurrent = HUMAN;
 let sqOver = false;
 let sqScores = { X: 0, O: 0 };
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function startTrackingGlitches() {
+  if (!screenShell) {
+    return;
+  }
+
+  const scheduleNextGlitch = () => {
+    const gapMs = randomInRange(5000, 20000);
+    window.setTimeout(() => {
+      screenShell.classList.add('is-glitching');
+
+      const glitchMs = randomInRange(300, 1500);
+      window.setTimeout(() => {
+        screenShell.classList.remove('is-glitching');
+        scheduleNextGlitch();
+      }, glitchMs);
+    }, gapMs);
+  };
+
+  scheduleNextGlitch();
+}
 
 function showPanel(name) {
   Object.values(panels).forEach((panel) => panel.classList.remove('active'));
@@ -438,3 +464,4 @@ infoBackBtn.addEventListener('click', () => {
 
 showPanel('menu');
 startBootSequence();
+startTrackingGlitches();
